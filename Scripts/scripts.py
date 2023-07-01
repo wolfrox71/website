@@ -17,7 +17,6 @@ def file_contents(filename, path="files/"):
 
 @scripts_bp.route("/")
 def index():
-    
     return render_template("home.html", scripts=return_files())
 
 @scripts_bp.route("<id>")
