@@ -4,6 +4,11 @@
 
 {% block body %}
 
-<p>This is a template for the index page of the home template</p>
-
+<table>
+    {% for path in paths %}
+        <tr>
+            <td><a href="{{ path }}">{{ paths[path] }}</a></td>
+        </tr>
+        {% endfor %}
+</table>
 {% endblock %}
