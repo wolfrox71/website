@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <table>
+            {% for script in scripts %}
+            <tr>
+                <td><a href="/{{ script }}">{{ script }}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
