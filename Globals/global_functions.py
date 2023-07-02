@@ -1,5 +1,7 @@
 from flask import session
 import hashlib
+from random import choice
+
 def validSessionID() -> bool:
     """Returns true if the session ID provided is valid for this session
     Returns False if not
@@ -35,8 +37,13 @@ def generateSessionID() -> str:
 
 def hashString(Value:str, Salt: str = "") -> str:
     """Takes a string as an input and an optional salt and hashes it with sha512 and returns that value"""
-    
+
     input = Value+Salt
     output = hashlib.sha512(input.encode("utf-8")).hexdigest()
 
     return output
+
+def generateSalt(length: int = 32) -> str:
+    """Generates a salt and returns it for use in the users database for hashing passwords"""
+    ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    return ''.join(choice(ALPHABET) for i in range(length)) 
