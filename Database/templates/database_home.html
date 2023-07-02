@@ -1,0 +1,18 @@
+{% extends "base_database.html" %}
+
+{% block title%}Database home page{% endblock %}
+
+{% block body %}
+<table>
+    <a href="{{url_for('database_bp.setup')}}">Setup</a>
+    <br>
+    <br>
+    {% for table in tables %}
+        <tr>
+            <td>
+                <a href="{{tables[table]}}">{{table}}</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

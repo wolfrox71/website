@@ -12,14 +12,8 @@ def detailsCorrect(username: str, password: str) -> bool:
     conn = sqlite3.connect(database_json["filename"])
     c = conn.cursor()
 
-    # create table if it does not exist    
-    c.execute(f"CREATE TABLE IF NOT EXISTS {database_json['table']} (userID INTEGER PRIMARY KEY, username TEXT, password TEXT, salt TEXT)")
-    # and commit the (potential) changes to the database
-    conn.commit()
-
-
     # get all the data where the username and password match the username and password provided by the users login screen
-    c.execute(f"SELECT * FROM {database_json['table']} WHERE username='{username}' AND password='{password}'")
+    c.execute(f"SELECT * FROM users WHERE username='{username}' AND password='{password}'")
     conn.commit()
     results = c.fetchall()
 
@@ -36,7 +30,7 @@ def usernameInUse(username:str) -> bool:
     conn = sqlite3.connect(database_json["filename"])
     c = conn.cursor()
 
-    c.execute(f"SELECT * FROM {database_json['table']} WHERE username='{username}'")
+    c.execute(f"SELECT * FROM users WHERE username='{username}'")
     conn.commit()
     results = c.fetchall()
 
@@ -51,7 +45,7 @@ def getSalt(username: str) -> str:
     conn = sqlite3.connect(database_json["filename"])
     c = conn.cursor()
 
-    c.execute(f"SELECT salt FROM {database_json['table']} WHERE username='{username}'")
+    c.execute(f"SELECT salt FROM users WHERE username='{username}'")
     conn.commit()
     salt = c.fetchone()[0]
 
@@ -61,8 +55,6 @@ def getSalt(username: str) -> str:
 
     return salt
     
-
-
 def insertUser(username: str, password: str, salt: str):
     """Insert the username and hashed password, and salt to hash the password into the database"""
     database_json = json.load(open("Globals/details/database.json"))
@@ -78,7 +70,7 @@ def insertUser(username: str, password: str, salt: str):
     conn = sqlite3.connect(database_json["filename"])
     c = conn.cursor()
 
-    c.execute(f"SELECT MAX(userID) FROM {database_json['table']}")
+    c.execute(f"SELECT MAX(userID) FROM users")
 
     count = c.fetchone()[0]
     if count is None:
@@ -89,7 +81,7 @@ def insertUser(username: str, password: str, salt: str):
     count += 1
 
     # insert the username and password into the table
-    c.execute(f"INSERT INTO {database_json['table']} VALUES ('{count}', '{username}', '{password}', '{salt}')")
+    c.execute(f"INSERT INTO users VALUES ('{count}', '{username}', '{password}', '{salt}')")
     conn.commit()
 
 @login_bp.route("/")

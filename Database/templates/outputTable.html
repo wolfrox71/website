@@ -1,0 +1,22 @@
+{% extends "base_database.html" %}
+
+{% block title%}Ouput Database content{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+         {% for head in heading %}
+        <td>{{head}}</td>
+        {% endfor %}
+    </tr>
+   
+    <tr></tr>
+    {% for row in data %}
+        <tr>
+            {% for cell in row %}
+                <td>{{cell}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
