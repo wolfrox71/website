@@ -4,7 +4,7 @@ import json
 from os.path import join, dirname, realpath 
 from Home.home import home_bp
 
-database_bp = Blueprint("database_bp", __name__, template_folder="templates")
+database_bp = Blueprint("database_bp", __name__, template_folder="../templates/Database/")
 
 def returnValuesOfDatabase(table: str):
     """Return the values from the specified table"""
@@ -77,11 +77,11 @@ def index():
         tables[name] = url.strip()
 
     print(tables)
-    return render_template("database_home.html", tables=tables)
+    return render_template("Database_home.html", tables=tables)
 
 @database_bp.route("/list/<table>")
 def listDatabase(table):
-    return render_template("outputTable.html", data=returnValuesOfDatabase(table), heading=getHeadings(table))
+    return render_template("Database_outputTable.html", data=returnValuesOfDatabase(table), heading=getHeadings(table))
 
 @database_bp.route("/setup")
 def setup():

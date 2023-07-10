@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 from os import walk
 from os.path import join, dirname, realpath
 
-scripts_bp = Blueprint("script_bp", __name__, template_folder="templates")
+scripts_bp = Blueprint("script_bp", __name__, template_folder="../templates/Scripts/")
 
 def return_files(path="files/"):
     full_path = join(dirname(realpath(__file__)),path) # should return fullpath to main.py + /Scripts/files
@@ -17,7 +17,7 @@ def file_contents(filename, path="files/"):
 
 @scripts_bp.route("/")
 def index():
-    return render_template("home.html", scripts=return_files())
+    return render_template("Scripts_home.html", scripts=return_files())
 
 @scripts_bp.route("<id>")
 def script(id):

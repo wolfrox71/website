@@ -3,7 +3,7 @@ import Globals.global_functions as global_functions
 import json
 import sqlite3
 
-login_bp = Blueprint("login_bp", __name__, template_folder="templates")
+login_bp = Blueprint("login_bp", __name__, template_folder="../../templates/Login/")
 
 def detailsCorrect(username: str, password: str) -> bool:
     """Returns true if the username and password are in the database"""
@@ -91,12 +91,12 @@ def index():
         status = ""
     else:
         status = "not "
-    return render_template("login_home.html", status=status)
+    return render_template("Login_home.html", status=status)
 
 @login_bp.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "GET":
-        return render_template("login_page.html")
+        return render_template("Login_page.html")
     
     if request.method == "POST":
         # if the user does not exist
@@ -129,7 +129,7 @@ def logout():
 @login_bp.route("/createUser", methods=["POST", "GET"])
 def createUser():
     if request.method == "GET":
-        return render_template("create_user.html")
+        return render_template("Login_create_user.html")
     
     if request.method == "POST":
         # if the passwords to not match

@@ -3,3 +3,4 @@ user/:User
 user/login/:Login
 /:Home
 database/:Database
+random/:Random

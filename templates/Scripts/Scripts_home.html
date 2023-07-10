@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title%}Scripts Home page{% endblock %}
+
+{% block body %}
+
+<h1>To Use:</h1>
+<h2>curl {URL} | bash</h2>
+<table>
+    {% for script in scripts %}
+    <tr>
+        <td><a href="{{ script }}">{{ script }}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
